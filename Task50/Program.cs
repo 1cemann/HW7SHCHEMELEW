@@ -11,29 +11,32 @@ using System;
 using static System.Console;
 Clear();
 Write("Введите число:  ");
-int find=int.Parse(ReadLine());
-
-
+int number = Convert.ToInt32(Console.ReadLine());
 int[,] matrix = new int[4, 4];
 GetRandomArray(matrix);
 PrintArray(matrix);
+WriteLine();
+GetNumberInArray(matrix);
 
 
 
 int GetNumberInArray(int[,] matr)
 {
-    if(position[0]<=m&&position[1]<=n&&position[0]>=0&&position[1]>=0)
+int m=0, n=0;
+bool f = false;
+for (int i = 0; i < matr.GetLength(0); i++)
+{
+    for (int j = 0; j < matr.GetLength(1); j++)
     {
-        int result = array[position[0]-1, position[1]-1];
-        Console.Write($"Значение элемента: {result}");
+        if (number == matr[i, j]) { m = i;n = j;f = true; };
     }
-    else Console.Write($"такого элемента в массиве нет."); 
 }
-
-
-
-
-
+if (f)
+    WriteLine($"Число найдено. Строка {m+1} Столбец {n+1}");
+else
+WriteLine("Число не найдено");
+return number;
+}
 
 
 void PrintArray(int[,] matr)
@@ -54,7 +57,7 @@ void GetRandomArray(int[,] matr)
     {
         for (int j = 0; j < matr.GetLength(1); j++)
         {
-            matr[i, j] = new Random().Next(1, 100); 
+            matr[i, j] = new Random().Next(1, 20); 
         }
     }
 }
